@@ -1,4 +1,7 @@
-app.post("POST", ({ body }, res) => {
+const router = require('express').Router();
+const Workout = require('../models/workout');
+
+router.post("POST", ({ body }, res) => {
     Workout.create(body)
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -74,3 +77,4 @@ app.post("POST", ({ body }, res) => {
   //   );
   // });
   
+  module.exports = router;
