@@ -1,14 +1,4 @@
-// Calculate total pounds
-db.workout.aggregate(
-    [
-      {
-        $group:
-          {
-            totalWeight: { $sum: { $multiply: [ "$weight", "$reps", "$sets" ] } },
-          }
-      }
-    ]
- )
+// Calculate total weight and workout duration
 
  db.workout.aggregate(
     [
@@ -16,7 +6,7 @@ db.workout.aggregate(
         $addFields:
           {
             totalDuration: { $sum: '$exercises.duration' },
-            totalWeight: { $sum: { $multiply: [ "$weight", "$reps", "$sets" ] } },
+            // totalWeight: { $sum: { $multiply: [ "$weight", "$reps", "$sets" ] } },
           }
       }
     ]

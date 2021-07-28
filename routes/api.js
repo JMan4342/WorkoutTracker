@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Workout = require('../models/workout');
 
-router.post("POST", ({ body }, res) => {
+router.post("/api/workouts", ({ body }, res) => {
     Workout.create(body)
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -11,6 +11,25 @@ router.post("POST", ({ body }, res) => {
       });
   });
   
+router.get("/api/workouts", (req, res) => {
+  Workout.aggregate(
+    [
+      {
+        $addFields:
+          {
+            totalDuration: { $sum: '$exercises.duration' },
+            // totalWeight: { $sum: { $multiply: [ "$weight", "$reps", "$sets" ] } },
+          }
+      }
+    ]
+ )
+  .then(dbWorkout => {
+    res.json(dbWorkout);
+  })
+  .catch(err => {
+    res.json(err);
+  });
+})
   // app.get("/read", (req, res) => {
   //   db.day.find({ read: true }, (error, found) => {
   //     if (error) {
