@@ -28,7 +28,7 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts/" + id, (req, res) => {
+router.put("/api/workouts", (req, res) => {
   Workout.create(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
@@ -38,8 +38,8 @@ router.put("/api/workouts/" + id, (req, res) => {
     });
 });
 
-router.get("/api/workouts/range", ({ body }, res) => {
-  Workout.create(body)
+router.get("/api/workouts/range", (req, res) => {
+  Workout.find()
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })

@@ -1,3 +1,4 @@
+// **** STARTER CODE, HAVE NOT TOUCHED ****
 const API = {
   async getLastWorkout() {
     let res;
