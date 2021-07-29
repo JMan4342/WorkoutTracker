@@ -28,8 +28,24 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts", (req, res) => {
-  Workout.create(body)
+router.put("/api/workouts/:id", (req, res) => {
+  // const id = {_id: Workout(req.params.id)};
+  Workout.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $push: {
+        exercises: {
+          type: req.body.type,
+          name: req.body.name,
+          duration: req.body.duration,
+          weight: req.body.weight,
+          reps: req.body.reps,
+          sets: req.body.sets,
+          distance: req.body.distance,
+        },
+      },
+    }
+  )
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
