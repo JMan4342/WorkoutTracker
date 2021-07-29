@@ -16,7 +16,6 @@ router.get("/api/workouts", (req, res) => {
     {
       $addFields: {
         totalDuration: { $sum: "$exercises.duration" },
-        // totalWeight: { $sum: { $multiply: [ "$weight", "$reps", "$sets" ] } },
       },
     },
   ])
@@ -29,7 +28,6 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-  // const id = {_id: Workout(req.params.id)};
   Workout.findByIdAndUpdate(
     { _id: req.params.id },
     {
@@ -63,71 +61,5 @@ router.get("/api/workouts/range", (req, res) => {
       res.json(err);
     });
 });
-
-// app.get("/read", (req, res) => {
-//   db.day.find({ read: true }, (error, found) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       res.json(found);
-//     }
-//   });
-// });
-
-// app.get("/unread", (req, res) => {
-//   db.day.find({ read: false }, (error, found) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       res.json(found);
-//     }
-//   });
-// });
-
-// app.put("/markread/:id", ({ params }, res) => {
-//   db.day.update(
-//     {
-//       _id: mongojs.ObjectId(params.id)
-//     },
-//     {
-//       $set: {
-//         read: true
-//       }
-//     },
-
-//     (error, edited) => {
-//       if (error) {
-//         console.log(error);
-//         res.send(error);
-//       } else {
-//         console.log(edited);
-//         res.send(edited);
-//       }
-//     }
-//   );
-// });
-
-// app.put("/markunread/:id", ({ params }, res) => {
-//   db.day.update(
-//     {
-//       _id: mongojs.ObjectId(params.id)
-//     },
-//     {
-//       $set: {
-//         read: false
-//       }
-//     },
-
-//     (error, edited) => {
-//       if (error) {
-//         console.log(error);
-//         res.send(error);
-//       } else {
-//         console.log(edited);
-//         res.send(edited);
-//       }
-//     }
-//   );
-// });
 
 module.exports = router;

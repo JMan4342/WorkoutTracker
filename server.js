@@ -20,10 +20,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useCreateIndex: true,
   useFindAndModify: false});
 
-// db.on("error", error => {
-//   console.log("Database Error:", error);
-// });
-
 app.use(require("./routes/api"));
 app.use(require("./routes/homeRoutes"));
 
